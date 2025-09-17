@@ -1,0 +1,77 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bin/
+obj/
+[Bb]uild/
+
+# NuGet packages
+*.nupkg
+# The packages folder can be ignored because of NuGet restore
+packages/
+
+# NuGet v3 cache folder
+.nuget/packages/
+
+# Others
+*.log
+*.vspscc
+*.vssscc
+
+# Rider
+.idea/
+
+# DotCover
+.idea/.dotCover/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# User-specific files
+*.rsuser
+*.resharper
+
+# WPF Designer generated files
+*.g.i.cs
+*.g.cs
+*.generated.cs
+
+# Publish output folder
+publish/
+
+# IIS Express
+/.vs/config/
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Others
+*.pdb
+*.cache
+*.ilk
+*.obj
+*.idb
+*.exe
+*.dll
+*.mdb
+*.class
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
