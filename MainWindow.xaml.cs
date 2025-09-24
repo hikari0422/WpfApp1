@@ -33,11 +33,13 @@ namespace WpfApp1
             bool success = int.TryParse(TargetTextBox.Text, out amount);
             if (!success || amount <= 0)
             {
-
+                MessageBox.Show("輸入整數");
             }
             else
             {
-
+                var targetStackPanel = TargetTextBox.Parent as StackPanel;
+                var targetNameLabel = targetStackPanel.Children[0] as Label;
+                var targetPriceLabel = targetStackPanel.Children[1] as Label;
             }
         }
     }
