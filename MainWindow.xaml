@@ -20,13 +20,14 @@
 
         <GroupBox Header="用餐方式" Grid.Row="0" Margin="10,10,10,7">
             <StackPanel Orientation="Horizontal" Height="33">
-                <RadioButton x:Name="radio1" Content="外帶" Margin="5" Checked="radioBtnCHecked"/>
-                <RadioButton x:Name="radio2" Content="內用" Margin="5" IsChecked="True" Checked="radioBtnCHecked"/>
+                <RadioButton x:Name="radio1" Content="外帶" Margin="5" Checked="radioBtnChecked"/>
+                <RadioButton x:Name="radio2" Content="內用" Margin="5" IsChecked="True" Checked="radioBtnChecked"/>
             </StackPanel>
         </GroupBox>
 
         <StackPanel Background="Aqua" Grid.Row="1" Margin="2, 2, 2, 2">
             <StackPanel Height="38" Background="Beige" Margin="5, 5, 5, 0" Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="10,0,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 <Label Content="food1" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30"/>
                 <Label Content="40元" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30" Foreground="Red"/>
                 <Slider Maximum="20" x:Name="slider1" VerticalAlignment="Center" Width="216" FontSize="14" IsSnapToTickEnabled="True" TickPlacement="Both" ValueChanged="slider_ValueChanged"/>
@@ -34,6 +35,7 @@
             </StackPanel>
 
             <StackPanel Height="38" Background="Beige" Margin="5, 5, 5, 0" Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="10,0,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 <Label Content="food2" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30"/>
                 <Label Content="60元" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30" Foreground="Red"/>
                 <Slider Maximum="20" x:Name="slider2" VerticalAlignment="Center" Width="216" FontSize="14" IsSnapToTickEnabled="True" ValueChanged="slider_ValueChanged"/>
@@ -41,6 +43,7 @@
             </StackPanel>
 
             <StackPanel Height="38" Background="Beige" Margin="5, 5, 5, 0" Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="10,0,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 <Label Content="food3" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30"/>
                 <Label Content="65元" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30" Foreground="Red"/>
                 <Slider Maximum="20" x:Name="slider3" VerticalAlignment="Center" Width="216" FontSize="14" IsSnapToTickEnabled="True" ValueChanged="slider_ValueChanged"/>
@@ -48,6 +51,7 @@
             </StackPanel>
 
             <StackPanel Height="38" Background="Beige" Margin="5, 5, 5, 0" Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="10,0,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 <Label Content="food4" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30"/>
                 <Label Content="70元" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30" Foreground="Red"/>
                 <Slider Maximum="20" x:Name="slider4" VerticalAlignment="Center" Width="216" FontSize="14" IsSnapToTickEnabled="True" ValueChanged="slider_ValueChanged"/>
@@ -55,6 +59,7 @@
             </StackPanel>
 
             <StackPanel Height="38" Background="Beige" Margin="5, 5, 5, 0" Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="10,0,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 <Label Content="food5" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30"/>
                 <Label Content="80元" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30" Foreground="Red"/>
                 <Slider Maximum="20" x:Name="slider5" VerticalAlignment="Center" Width="216" FontSize="14" IsSnapToTickEnabled="True" ValueChanged="slider_ValueChanged"/>
@@ -62,6 +67,7 @@
             </StackPanel>
 
             <StackPanel Height="38" Background="Beige" Margin="5, 5, 5, 0" Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="10,0,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 <Label Content="food6" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30"/>
                 <Label Content="90元" FontSize="14" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50, 2, 0, 2" Height="30" Foreground="Red"/>
                 <Slider Maximum="20" x:Name="slider6" VerticalAlignment="Center" Width="216" FontSize="14" IsSnapToTickEnabled="True" ValueChanged="slider_ValueChanged"/>
@@ -70,8 +76,7 @@
         </StackPanel>
 
         <Button Grid.Column="1" Grid.Row="1" x:Name="OrderBtn" Content="訂購" Margin="0, 78, 0, 0" Height="38" Width="100" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="16" Click="OrderBtn_Click"/>
-        <TextBlock Margin="10,10,10,10" x:Name="finalOrder" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" FontSize="16" Background="#FFF3F5E3" Grid.ColumnSpan="2"/>
-
+        <TextBlock Margin="10,10,10,10" x:Name="finalOrder" Grid.Row="2" TextWrapping="Wrap" FontSize="16" Background="#FFF3F5E3" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
