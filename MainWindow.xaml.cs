@@ -18,6 +18,8 @@ namespace WpfApp1
 
         Dictionary<string, int> orders = new Dictionary<string, int>();
 
+        string buy_type = "內用";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -25,7 +27,8 @@ namespace WpfApp1
 
         private void OrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            finalOrder.Text = "飲料訂單如下:\n";
+            finalOrder.Text = $"用餐方式: {buy_type}\n";
+            finalOrder.Text += "飲料訂單如下:\n";
             int total = 0;
             int index = 0;
 
@@ -43,34 +46,7 @@ namespace WpfApp1
                 }
             }
 
-            finalOrder.Text += $"總計:{total}元";
-        }
-
-        private void TextBox_Changed(object sender, TextChangedEventArgs e)
-        {
-            var TargetTextBox = sender as TextBox;
-            if (TargetTextBox == null) return;
-
-            int amount;
-            bool success = int.TryParse(TargetTextBox.Text, out amount);
-
-            var targetStackPanel = TargetTextBox.Parent as StackPanel;
-            var targetNameLabel = targetStackPanel?.Children[0] as Label;
-
-            if (targetNameLabel == null) return;
-
-            string drinkName = targetNameLabel.Content.ToString();
-
-            if (!success || amount < 0)
-            {
-                MessageBox.Show("請輸入正整數");
-                return;
-            }
-
-            if (menu.ContainsKey(drinkName))
-            {
-                orders[drinkName] = amount;
-            }
+            finalOrder.Text += $"總計: {total}元";
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -89,6 +65,15 @@ namespace WpfApp1
             if (menu.ContainsKey(drinkName))
             {
                 orders[drinkName] = amount;
+            }
+        }
+
+        private void radioBtnCHecked(object sender, RoutedEventArgs e)
+        {
+            RadioButton targetRadioBtn = sender as RadioButton;
+            if (targetRadioBtn != null)
+            {
+                buy_type = targetRadioBtn.Content.ToString();
             }
         }
     }
