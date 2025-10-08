@@ -47,7 +47,6 @@ namespace WpfApp1
                     VerticalContentAlignment = VerticalAlignment.Center
                 };
 
-                // ✅ 綁定 CheckBox Checked/Unchecked 事件
                 cb.Checked += CheckBox_Checked;
                 cb.Unchecked += CheckBox_Unchecked;
 
@@ -74,7 +73,6 @@ namespace WpfApp1
                     IsSnapToTickEnabled = true
                 };
 
-                // ✅ 綁定 Slider.ValueChanged 事件
                 sl.ValueChanged += slider_ValueChanged;
 
                 var lb_amount = new Label
