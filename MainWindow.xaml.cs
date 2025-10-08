@@ -162,6 +162,14 @@ namespace WpfApp1
 
             finalOrder.Text += $"共折價 {discount:F0} 元\n";
             finalOrder.Text += $"總計: {total:F0} 元";
+
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFile.FileName = "訂購內容";
+            if (saveFile.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFile.FileName, finalOrder.Text);
+            }
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
