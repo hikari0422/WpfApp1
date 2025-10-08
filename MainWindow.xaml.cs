@@ -1,28 +1,126 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        Dictionary<string, int> menu = new Dictionary<string, int>
-        {
-            {"food1", 40 },
-            {"food2", 60 },
-            {"food3", 65 },
-            {"food4", 70 },
-            {"food5", 80 },
-            {"food6", 90 },
-        };
-
+        Dictionary<string, int> menu = new Dictionary<string, int>();
         Dictionary<string, int> orders = new Dictionary<string, int>();
-
         string buy_type = "內用";
 
         public MainWindow()
         {
             InitializeComponent();
+            inputDrinkItem(menu);
+            displayDrinkMenu(menu);
+        }
+
+        private void displayDrinkMenu(Dictionary<string, int> menu)
+        {
+            drinkItemList.Height = menu.Count * 50;
+
+            foreach (var drink in menu)
+            {
+                var sp = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Margin = new Thickness(2),
+                    Background = Brushes.LightBlue,
+                    Height = 35
+                };
+
+                var cb = new CheckBox
+                {
+                    Content = drink.Key,
+                    FontFamily = new FontFamily("微軟正黑體"),
+                    FontSize = 16,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = Brushes.DarkBlue,
+                    Width = 150,
+                    Margin = new Thickness(2),
+                    VerticalContentAlignment = VerticalAlignment.Center
+                };
+
+                // ✅ 綁定 CheckBox Checked/Unchecked 事件
+                cb.Checked += CheckBox_Checked;
+                cb.Unchecked += CheckBox_Unchecked;
+
+                var lb_price = new Label
+                {
+                    Content = $"{drink.Value} 元",
+                    FontFamily = new FontFamily("微軟正黑體"),
+                    FontSize = 16,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = Brushes.DarkRed,
+                    Width = 60,
+                    Margin = new Thickness(2),
+                    VerticalContentAlignment = VerticalAlignment.Center
+                };
+
+                var sl = new Slider
+                {
+                    Value = 0,
+                    Minimum = 0,
+                    Maximum = 20,
+                    Margin = new Thickness(2),
+                    Width = 150,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    IsSnapToTickEnabled = true
+                };
+
+                // ✅ 綁定 Slider.ValueChanged 事件
+                sl.ValueChanged += slider_ValueChanged;
+
+                var lb_amount = new Label
+                {
+                    Content = "0",
+                    FontFamily = new FontFamily("微軟正黑體"),
+                    FontSize = 16,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = Brushes.DarkGreen,
+                    Width = 30,
+                    Margin = new Thickness(2),
+                    VerticalContentAlignment = VerticalAlignment.Center
+                };
+
+                Binding myBinding = new Binding("Value");
+                myBinding.Source = sl;
+                lb_amount.SetBinding(Label.ContentProperty, myBinding);
+
+                sp.Children.Add(cb);
+                sp.Children.Add(lb_price);
+                sp.Children.Add(sl);
+                sp.Children.Add(lb_amount);
+
+                drinkItemList.Children.Add(sp);
+            }
+        }
+
+        private void inputDrinkItem(Dictionary<string, int> menu)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "選擇飲料品項檔案";
+            openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string fileName = openFileDialog.FileName;
+                string[] lines = File.ReadAllLines(fileName);
+
+                foreach (var line in lines)
+                {
+                    string[] tokens = line.Split(',');
+                    string drinkName = tokens[0];
+                    int price = int.Parse(tokens[1]);
+                    menu.Add(drinkName, price);
+                }
+            }
         }
 
         private void OrderBtn_Click(object sender, RoutedEventArgs e)
@@ -78,12 +176,10 @@ namespace WpfApp1
             var targetStackPanel = targetSlider.Parent as StackPanel;
             if (targetStackPanel == null) return;
 
-            var nameLabel = targetStackPanel.Children[1] as Label; // 餐點名稱
             var checkBox = targetStackPanel.Children[0] as CheckBox;
+            if (checkBox == null) return;
 
-            if (nameLabel == null || checkBox == null) return;
-
-            string foodName = nameLabel.Content.ToString();
+            string foodName = checkBox.Content.ToString();
 
             if (menu.ContainsKey(foodName))
             {
@@ -106,12 +202,10 @@ namespace WpfApp1
             var parent = checkBox.Parent as StackPanel;
             if (parent == null) return;
 
-            var nameLabel = parent.Children[1] as Label;
-            var slider = parent.Children[3] as Slider;
+            var slider = parent.Children[2] as Slider;
+            if (slider == null) return;
 
-            if (nameLabel == null || slider == null) return;
-
-            string foodName = nameLabel.Content.ToString();
+            string foodName = checkBox.Content.ToString();
 
             int amount = (int)slider.Value;
             if (amount == 0)
@@ -128,13 +222,7 @@ namespace WpfApp1
             var checkBox = sender as CheckBox;
             if (checkBox == null) return;
 
-            var parent = checkBox.Parent as StackPanel;
-            if (parent == null) return;
-
-            var nameLabel = parent.Children[1] as Label;
-            if (nameLabel == null) return;
-
-            string foodName = nameLabel.Content.ToString();
+            string foodName = checkBox.Content.ToString();
             orders.Remove(foodName);
         }
 
